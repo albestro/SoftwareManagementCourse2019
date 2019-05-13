@@ -7,11 +7,4 @@ set_property(CACHE FP_PRECISION PROPERTY STRINGS float double)
 
 find_package(Boost REQUIRED COMPONENTS program_options)
 
-add_executable(dotprodcl src/dotprodcl.cc)
-if(FP_PRECISION STREQUAL "float")
-  target_compile_definitions(dotprodcl PRIVATE "PRECISION=4")
-elseif(FP_PRECISION STREQUAL "double")
-  target_compile_definitions(dotprodcl PRIVATE "PRECISION=8")
-endif()
-
-target_link_libraries(dotprodcl Boost::program_options)
+add_subdirectory(src)
