@@ -1,3 +1,6 @@
+set(FP_PRECISION "float" CACHE STRING "select floating point precision")
+set_property(CACHE FP_PRECISION PROPERTY STRINGS float double)
+
 add_executable(dotprodcl dotprodcl.cc)
 
 if(FP_PRECISION STREQUAL "float")
