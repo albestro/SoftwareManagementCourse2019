@@ -1,3 +1,11 @@
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY git@github.com:google/googletest.git
+)
+
+FetchContent_MakeAvailable(googletest)
+
 function(create_test_executables)
     set(options)
     set(oneValueArgs)
@@ -11,13 +19,7 @@ function(create_test_executables)
         target_link_libraries(${test_name} dotprod)
 
         # link with googletest library
-        add_dependencies(${test_name} googletest)
-        ExternalProject_Get_Property(googletest SOURCE_DIR)
-        target_include_directories(${test_name} PRIVATE ${SOURCE_DIR}/include)
-        ExternalProject_Get_Property(googletest BINARY_DIR)
-        target_link_directories(${test_name} PRIVATE ${BINARY_DIR})
-        target_link_libraries(${test_name} gtest gtest_main pthread)
-        target_link_libraries(${test_name} pthread) # don't do this (see presentation)
+        target_link_libraries(${test_name} gtest_main)
     endforeach()
 endfunction()
 
